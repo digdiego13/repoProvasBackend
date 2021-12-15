@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/provas', provasRouter);
+app.use(provasRouter);
 app.use(middlewareError);
 
 export async function init() {

@@ -3,6 +3,7 @@ import * as provasController from '../controllers/provasController';
 
 const provasRouter = Router();
 
-provasRouter.get('', provasController.getProvas);
+provasRouter.get('/provas', provasController.getProvas);
+provasRouter.get('/disciplinas', provasController.getDisciplinas);
 
 export default provasRouter;
