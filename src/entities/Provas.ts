@@ -7,7 +7,7 @@ class ProvaEntity {
   @Column()
   nomeProva: string;
   @Column()
-  categoriaProva: number;
+  categoriasId: number;
   @Column()
   linkProva: string;
   @Column()

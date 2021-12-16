@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { Prova } from '../interfaces/provaInterface';
 
 import * as userService from '../services/provasService';
 
@@ -22,4 +23,33 @@ async function getDisciplinas(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export { getProvas, getDisciplinas };
+async function getProfessoresDaDisciplina(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const { id } = req.body;
+  console.log(req.body);
+  try {
+    const professoresDaDisciplina =
+      await userService.getProfessoresDaDisciplina(Number(id));
+    return res.send(professoresDaDisciplina);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+}
+
+async function insertProva(req: Request, res: Response, next: NextFunction) {
+  const provaObjt: Prova = req.body;
+  console.log(req.body);
+  try {
+    const prova = await userService.postProva(provaObjt);
+    return res.send(prova);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+}
+
+export { getProvas, getDisciplinas, getProfessoresDaDisciplina, insertProva };

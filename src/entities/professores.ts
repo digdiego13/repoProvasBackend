@@ -1,11 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import ProfDisEntity from './profDis';
 @Entity('professores')
-class professoresEntity {
+class ProfessoresEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
   nomeProfessor: string;
+
+  @OneToMany(() => ProfDisEntity, (profDis) => profDis.professores)
+  profDis: ProfDisEntity[];
 }
 
-export default professoresEntity;
+export default ProfessoresEntity;
