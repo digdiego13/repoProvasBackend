@@ -4,8 +4,9 @@ import { Prova } from '../interfaces/provaInterface';
 import * as userService from '../services/provasService';
 
 async function getProvas(req: Request, res: Response, next: NextFunction) {
+  const { id } = req.body;
   try {
-    const provas = await userService.getProvas();
+    const provas = await userService.getProvas(Number(id));
     return res.send(provas);
   } catch (err) {
     console.error(err);
@@ -52,4 +53,20 @@ async function insertProva(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export { getProvas, getDisciplinas, getProfessoresDaDisciplina, insertProva };
+async function getProfessores(req: Request, res: Response, next: NextFunction) {
+  try {
+    const professores = await userService.getProfessores();
+    return res.send(professores);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+}
+
+export {
+  getProvas,
+  getDisciplinas,
+  getProfessoresDaDisciplina,
+  insertProva,
+  getProfessores,
+};

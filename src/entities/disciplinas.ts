@@ -10,7 +10,7 @@ class DisciplinasEntity {
   @Column()
   periodoDisciplina: number;
 
-  @OneToMany(() => ProfDisEntity, (profDis) => profDis.professores)
+  @OneToMany(() => ProfDisEntity, (profDis) => profDis.disciplinas)
   profDis: ProfDisEntity[];
 }
 

@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import CategoriasEntity from './categorias';
+import ProfDisEntity from './profDis';
 
 @Entity('provas')
 class ProvaEntity {

@@ -3,17 +3,23 @@ import { getRepository } from 'typeorm';
 import disciplinasEntity from '../entities/disciplinas';
 import ProfDisEntity from '../entities/profDis';
 import profDisEntity from '../entities/profDis';
-
+import ProfessoresEntity from '../entities/professores';
+import { getManager } from 'typeorm';
 import ProvaEntity from '../entities/Provas';
 import NotFoundError from '../errors/notFoundError';
 import { Prova } from '../interfaces/provaInterface';
 
-async function getProvas() {
-  const provas = await getRepository(ProvaEntity).find({
-    select: ['id', 'nomeProva'],
-  });
+async function getProvas(id: number) {
+  const result = getManager().query(
+    `SELECT * FROM provas
+  JOIN "profDis" ON provas."profDisId" = "profDis".id
+  JOIN professores ON "profDis"."professoresId" = professores.id
+  JOIN disciplinas ON "profDis"."disciplinasId" = disciplinas.id
+  WHERE professores.id = $1`,
+    [Number(id)],
+  );
 
-  return provas;
+  return result;
 }
 
 async function getDisciplinas() {
@@ -25,11 +31,9 @@ async function getDisciplinas() {
 }
 
 async function getProfessores() {
-  const disciplinas = await getRepository(disciplinasEntity).find({
-    select: ['nomeDisciplina', 'periodoDisciplina'],
-  });
+  const professores = await getRepository(ProfessoresEntity).find();
 
-  return disciplinas;
+  return professores;
 }
 
 async function getProfessoresDaDisciplina(id: number) {
