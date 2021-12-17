@@ -22,6 +22,19 @@ async function getProvas(id: number) {
   return result;
 }
 
+async function getProvasPorDisciplina(id: number) {
+  const result = getManager().query(
+    `SELECT * FROM provas
+  JOIN "profDis" ON provas."profDisId" = "profDis".id
+  JOIN professores ON "profDis"."professoresId" = professores.id
+  JOIN disciplinas ON "profDis"."disciplinasId" = disciplinas.id
+  WHERE disciplinas.id = $1`,
+    [Number(id)],
+  );
+
+  return result;
+}
+
 async function getDisciplinas() {
   const disciplinas = await getRepository(disciplinasEntity).find({
     select: ['id', 'nomeDisciplina', 'periodoDisciplina'],
@@ -73,4 +86,5 @@ export {
   getProfessores,
   getProfessoresDaDisciplina,
   postProva,
+  getProvasPorDisciplina,
 };

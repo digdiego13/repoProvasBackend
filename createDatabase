@@ -1,7 +1,7 @@
 CREATE TABLE "provas" (
 	"id" serial NOT NULL,
 	"nomeProva" varchar(255) NOT NULL,
-	"categoriaProva" integer NOT NULL,
+	"categoriasId" integer NOT NULL,
 	"linkProva" varchar(255) NOT NULL,
 	"profDisId" integer NOT NULL,
 	CONSTRAINT "provas_pk" PRIMARY KEY ("id")
@@ -44,8 +44,8 @@ CREATE TABLE "categorias" (
 
 CREATE TABLE "profDis" (
 	"id" serial NOT NULL,
-	"disciplinaId" integer NOT NULL,
-	"professorId" integer NOT NULL,
+	"disciplinasId" integer NOT NULL,
+	"professoresId" integer NOT NULL,
 	CONSTRAINT "profDis_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -53,14 +53,14 @@ CREATE TABLE "profDis" (
 
 
 
-ALTER TABLE "provas" ADD CONSTRAINT "provas_fk0" FOREIGN KEY ("categoriaProva") REFERENCES "categorias"("id");
+ALTER TABLE "provas" ADD CONSTRAINT "provas_fk0" FOREIGN KEY ("categoriasId") REFERENCES "categorias"("id");
 ALTER TABLE "provas" ADD CONSTRAINT "provas_fk1" FOREIGN KEY ("profDisId") REFERENCES "profDis"("id");
 
 
 
 
-ALTER TABLE "profDis" ADD CONSTRAINT "profDis_fk0" FOREIGN KEY ("disciplinaId") REFERENCES "disciplinas"("id");
-ALTER TABLE "profDis" ADD CONSTRAINT "profDis_fk1" FOREIGN KEY ("professorId") REFERENCES "professores"("id");
+ALTER TABLE "profDis" ADD CONSTRAINT "profDis_fk0" FOREIGN KEY ("disciplinasId") REFERENCES "disciplinas"("id");
+ALTER TABLE "profDis" ADD CONSTRAINT "profDis_fk1" FOREIGN KEY ("professoresId") REFERENCES "professores"("id");
 
 INSERT INTO categorias ("nomeCategoria") VALUES ('P1');
 INSERT INTO categorias ("nomeCategoria") VALUES ('P2');
@@ -91,20 +91,20 @@ INSERT INTO disciplinas ("nomeDisciplina", "periodoDisciplina") VALUES ('quimica
 INSERT INTO disciplinas ("nomeDisciplina", "periodoDisciplina") VALUES ('Fisica 3', 3);
 
 
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (1, 1);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (2, 2);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (3, 3);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (4, 4);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (5, 5);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (6, 1);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (7, 2);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (8, 3);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (9, 4);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (8, 3);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (7, 3);
-INSERT INTO "profDis" ("disciplinaId", "professorId") VALUES (2, 2);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (1, 1);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (2, 2);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (3, 3);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (4, 4);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (5, 5);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (6, 1);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (7, 2);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (8, 3);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (9, 4);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (8, 3);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (7, 3);
+INSERT INTO "profDis" ("disciplinasId", "professoresId") VALUES (2, 2);
 
-INSERT INTO "provas" ("nomeProva", "categoriaProva", "linkProva", "profDisId") VALUES ('2020.1', 1, 'https://github.com/digdiego13/overflowAPI', 2);
+INSERT INTO "provas" ("nomeProva", "categoriasId", "linkProva", "profDisId") VALUES ('2020.1', 1, 'https://github.com/digdiego13/overflowAPI', 2);
 
 
 

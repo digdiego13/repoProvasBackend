@@ -4,6 +4,7 @@ import * as provasController from '../controllers/provasController';
 const provasRouter = Router();
 
 provasRouter.post('/provasprofessor', provasController.getProvas);
+provasRouter.post('/provasdisciplina', provasController.getProvasPorDisciplina);
 provasRouter.get('/disciplinas', provasController.getDisciplinas);
 provasRouter.post('/profdis', provasController.getProfessoresDaDisciplina);
 provasRouter.post('/prova', provasController.insertProva);

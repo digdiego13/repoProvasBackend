@@ -14,6 +14,21 @@ async function getProvas(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function getProvasPorDisciplina(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const { id } = req.body;
+  try {
+    const provas = await userService.getProvasPorDisciplina(Number(id));
+    return res.send(provas);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+}
+
 async function getDisciplinas(req: Request, res: Response, next: NextFunction) {
   try {
     const disciplinas = await userService.getDisciplinas();
@@ -69,4 +84,5 @@ export {
   getProfessoresDaDisciplina,
   insertProva,
   getProfessores,
+  getProvasPorDisciplina,
 };
