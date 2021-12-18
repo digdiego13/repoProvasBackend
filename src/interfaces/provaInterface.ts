@@ -7,8 +7,35 @@ interface Prova {
   disciplinaId?: number;
 }
 
-interface ProvaDB extends Prova {
+interface ProvaDB {
   id: number;
+  nomeProva: string;
+  categoriasId: number;
+  linkProva: string;
+  profDisId: number;
+  disciplinasId: number;
+  professoresId: number;
+  nomeProfessor: string;
+  nomeDisciplina: string;
+  periodoDisciplina: number;
 }
 
-export { Prova, ProvaDB };
+interface Disciplina {
+  id: number;
+  nomeDisciplina: string;
+  periodoDisciplina: number;
+}
+
+interface Professor {
+  id: number;
+  nomeProfessor: string;
+}
+
+interface ProfDis {
+  id: number;
+  professores: {
+    id: number;
+    nomeProfessor: string;
+  };
+}
+export { Prova, ProvaDB, Disciplina, Professor, ProfDis };

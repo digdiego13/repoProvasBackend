@@ -1,10 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { Prova } from '../interfaces/provaInterface';
-
+import idSchema from '../schemas/idSchema';
+import httpStatusCode from '../enums/httpStatusCode';
+import provaSchema from '../schemas/provaSchema';
 import * as userService from '../services/provasService';
+import { Id } from '../interfaces/idInterface';
 
 async function getProvas(req: Request, res: Response, next: NextFunction) {
-  const { id } = req.body;
+  const { id }: Id = req.body;
+  const isCorrectBody = idSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res
+      .status(httpStatusCode.BAD_REQUEST)
+      .send(`${isCorrectBody.error.details[0].message}`);
+  }
   try {
     const provas = await userService.getProvas(Number(id));
     return res.send(provas);
@@ -19,7 +28,13 @@ async function getProvasPorDisciplina(
   res: Response,
   next: NextFunction,
 ) {
-  const { id } = req.body;
+  const { id }: Id = req.body;
+  const isCorrectBody = idSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res
+      .status(httpStatusCode.BAD_REQUEST)
+      .send(`${isCorrectBody.error.details[0].message}`);
+  }
   try {
     const provas = await userService.getProvasPorDisciplina(Number(id));
     return res.send(provas);
@@ -44,8 +59,13 @@ async function getProfessoresDaDisciplina(
   res: Response,
   next: NextFunction,
 ) {
-  const { id } = req.body;
-  console.log(req.body);
+  const { id }: Id = req.body;
+  const isCorrectBody = idSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res
+      .status(httpStatusCode.BAD_REQUEST)
+      .send(`${isCorrectBody.error.details[0].message}`);
+  }
   try {
     const professoresDaDisciplina =
       await userService.getProfessoresDaDisciplina(Number(id));
@@ -58,7 +78,12 @@ async function getProfessoresDaDisciplina(
 
 async function insertProva(req: Request, res: Response, next: NextFunction) {
   const provaObjt: Prova = req.body;
-  console.log(req.body);
+  const isCorrectBody = provaSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res
+      .status(httpStatusCode.BAD_REQUEST)
+      .send(`Campos nao preenchidos corretamente`);
+  }
   try {
     const prova = await userService.postProva(provaObjt);
     return res.send(prova);
