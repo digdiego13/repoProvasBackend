@@ -6,7 +6,7 @@ class CategoriasEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
-  nomeCategorias: string;
+  nomeCategoria: string;
 }
 
 export default CategoriasEntity;

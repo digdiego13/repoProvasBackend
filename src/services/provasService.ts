@@ -60,7 +60,6 @@ async function getProfessoresDaDisciplina(id: number): Promise<ProfDis[]> {
     relations: ['professores'],
     select: ['id'],
   });
-
   return professoresDaDisciplina;
 }
 
@@ -84,7 +83,6 @@ async function postProva({
     linkProva,
     profDisId,
   });
-
   return prova;
 }
 

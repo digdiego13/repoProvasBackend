@@ -60,6 +60,7 @@ async function getProfessoresDaDisciplina(
   next: NextFunction,
 ) {
   const { id }: Id = req.body;
+
   const isCorrectBody = idSchema.validate(req.body);
   if (isCorrectBody.error) {
     return res
@@ -79,6 +80,7 @@ async function getProfessoresDaDisciplina(
 async function insertProva(req: Request, res: Response, next: NextFunction) {
   const provaObjt: Prova = req.body;
   const isCorrectBody = provaSchema.validate(req.body);
+
   if (isCorrectBody.error) {
     return res
       .status(httpStatusCode.BAD_REQUEST)
