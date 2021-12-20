@@ -1,6 +1,7 @@
 import supertest from 'supertest';
 import { getConnection } from 'typeorm';
-import app, { init } from '../../src/app';
+import app from '../../src/app';
+import { init } from '../../src/app';
 import { clearDatabase } from '../utils/database';
 import httpStatusCode from '../../src/enums/httpStatusCode';
 import {
